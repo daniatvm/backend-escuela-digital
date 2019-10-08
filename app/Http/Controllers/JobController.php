@@ -35,7 +35,6 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //Instanciamos la clase Pokemons
         $job = new Job;
         $job->name=$request->name;
         $job->save();

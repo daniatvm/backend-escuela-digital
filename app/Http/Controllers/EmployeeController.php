@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Employee;
 
 class EmployeeController extends Controller
 {
@@ -34,7 +35,18 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employee;
+        $employee->id_job=$request->id_job;
+        $employee->id_school=$request->id_school;
+        $employee->name=$request->name;
+        $employee->last_name=$request->last_name;
+        $employee->second_last_name=$request->second_last_name;
+        $employee->email=$request->email;
+        $employee->cellphone=$request->cellphone;
+        $employee->image=$request->image;
+        $employee->id_card=$request->id_card;
+        $employee->status=$request->status;
+        $employee->save();
     }
 
     /**
@@ -45,7 +57,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        return Employee::where('id_employee', $id)->get();
     }
 
     /**

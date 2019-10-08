@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\School;
 
 class SchoolController extends Controller
 {
@@ -45,7 +46,7 @@ class SchoolController extends Controller
      */
     public function show($id)
     {
-        //
+        return School::where('id_school', $id)->get();
     }
 
     /**

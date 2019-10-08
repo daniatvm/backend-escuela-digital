@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
@@ -34,7 +35,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->id_employee=$request->id_employee;
+        $user->id_access_type=$request->id_access_type;
+        $user->username=$request->username;
+        $user->password=$request->password;
+        $user->status=$request->status;
+        $user->save();
     }
 
     /**
@@ -45,7 +52,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::where('id_user', $id)->get();
     }
 
     /**

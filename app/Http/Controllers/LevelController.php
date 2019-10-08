@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Level;
 
 class LevelController extends Controller
 {
@@ -34,7 +35,9 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $level = new Level;
+        $level->name=$request->name;
+        $level->save();
     }
 
     /**
@@ -45,7 +48,7 @@ class LevelController extends Controller
      */
     public function show($id)
     {
-        //
+        return Level::where('id_level', $id)->get();
     }
 
     /**

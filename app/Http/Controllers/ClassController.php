@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Class_Room;
 
 class ClassController extends Controller
 {
@@ -34,7 +35,11 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $class = new Class_Room;
+        $class->id_level=$request->id_level;
+        $class->name=$request->name;
+        $class->status=$request->status;
+        $class->save();
     }
 
     /**
@@ -45,7 +50,7 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        //
+        return Class_Room::where('id_class', $id)->get();
     }
 
     /**

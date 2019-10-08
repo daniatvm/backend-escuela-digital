@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Class_x_Employee;
 
 class Class_x_EmployeeController extends Controller
 {
@@ -34,7 +35,11 @@ class Class_x_EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $class_x_employee = new Class_x_Employee;
+        $class_x_employee->id_class=$request->id_class;
+        $class_x_employee->id_employee=$request->id_employee;
+        $class_x_employee->type=$request->type;
+        $class_x_employee->save();
     }
 
     /**
@@ -45,7 +50,7 @@ class Class_x_EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        return Class_x_Employee::where('id_class_x_employee', $id)->get();
     }
 
     /**

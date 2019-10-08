@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Feedback;
 
 class FeedbackController extends Controller
 {
@@ -34,7 +35,15 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $feedback = new Feedback;
+        $feedback->id_school=$request->id_school;
+        $feedback->type=$request->type;
+        $feedback->name=$request->name;
+        $feedback->cellphone=$request->cellphone;
+        $feedback->email=$request->email;
+        $feedback->feedback_text=$request->feedback_text;
+        $feedback->status=$request->status;
+        $feedback->save();
     }
 
     /**
@@ -45,7 +54,7 @@ class FeedbackController extends Controller
      */
     public function show($id)
     {
-        //
+        return Feedback::where('id_feedback', $id)->get();
     }
 
     /**

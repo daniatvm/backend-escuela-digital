@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Gallery;
 
 class GalleryController extends Controller
 {
@@ -34,7 +35,10 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $gallery = new Gallery;
+        $gallery->id_school=$request->id_school;
+        $gallery->image=$request->image;
+        $gallery->save();
     }
 
     /**
@@ -45,7 +49,7 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        //
+        return Gallery::where('id_gallery', $id)->get();
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\New_Type;
 
 class New_TypeController extends Controller
 {
@@ -34,7 +35,9 @@ class New_TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_type = new New_Type;
+        $new_type->name=$request->name;
+        $new_type->save();
     }
 
     /**
@@ -45,7 +48,7 @@ class New_TypeController extends Controller
      */
     public function show($id)
     {
-        //
+        return New_Type::where('id_new_type', $id)->get();
     }
 
     /**

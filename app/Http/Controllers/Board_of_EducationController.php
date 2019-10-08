@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Board_of_Education;
 
 class Board_of_EducationController extends Controller
 {
@@ -34,7 +35,12 @@ class Board_of_EducationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $board_of_education = new Board_of_Education;
+        $board_of_education->id_school=$request->id_school;
+        $board_of_education->description=$request->description;
+        $board_of_education->email=$request->email;
+        $board_of_education->telephone=$request->telephone;
+        $board_of_education->save();
     }
 
     /**
@@ -45,7 +51,7 @@ class Board_of_EducationController extends Controller
      */
     public function show($id)
     {
-        //
+        return Board_of_Education::where('id_board_of_education', $id)->get();
     }
 
     /**

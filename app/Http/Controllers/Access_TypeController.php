@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Access_Type;
 
 class Access_TypeController extends Controller
 {
@@ -34,7 +35,9 @@ class Access_TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $access_type = new Access_Type;
+        $access_type->name=$request->name;
+        $access_type->save();
     }
 
     /**
@@ -45,7 +48,7 @@ class Access_TypeController extends Controller
      */
     public function show($id)
     {
-        //
+        return Access_Type::where('id_access_type', $id)->get();
     }
 
     /**
