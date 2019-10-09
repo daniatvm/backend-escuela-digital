@@ -17,7 +17,7 @@ class CreateClassTable extends Migration
             $table->bigIncrements('id_class');
             $table->unsignedBigInteger('id_level');
             $table->foreign('id_level')->references('id_level')->on('level');
-            $table->string('name',10);
+            $table->string('name',20);
             $table->boolean('status');
             $table->timestamps();
         });

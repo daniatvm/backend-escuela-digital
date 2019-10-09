@@ -15,7 +15,7 @@ class CreateAccessTypeTable extends Migration
     {
         Schema::create('access_type', function (Blueprint $table) {
             $table->bigIncrements('id_access_type');
-            $table->string('name',10);
+            $table->string('name',20);
             $table->timestamps();
         });
     }
