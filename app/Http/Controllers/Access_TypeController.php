@@ -41,14 +41,48 @@ class Access_TypeController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function bar_post(Request $request)
+    {
+        $data = ['id_user'=>1,'id_employee'=>1,'id_access_type'=>1,'username'=>$request->username];
+        if ($request->username == 'admin' && $request->password == 'admin') {
+            return response()->json([
+                'success'=>true,
+                'data'=>json_encode($data)
+            ]);
+        } else {
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function bar(){
+    public function bar($id)
+    {
+        $data = [
+            'name'=>'Escuela República Dominicana',
+            'description'=>'La escuela es una de las instituciones más importantes en la vida de una persona, quizás también una de las primordiales luego de la familia.',
+            'lat'=> 9.911337,
+            'lng'=> -84.056983,
+            'address'=> 'San Francisco de dos Ríos.',
+            'image'=> '',
+            'email'=> 'escuelarepublicadominicana@yahoo.es',
+            'cellphone'=> '7525-3654',
+            'telephone'=> '2536-5145'
+        ];
         return response()->json([
-            'message'=>'ME LE CAGO A JAIR'
+            'success'=>true,
+            'data'=>json_encode($data)
         ]);
     }
     public function show($id)
@@ -77,6 +111,17 @@ class Access_TypeController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function bar_update(Request $request, $id)
+    {
     }
 
     /**
