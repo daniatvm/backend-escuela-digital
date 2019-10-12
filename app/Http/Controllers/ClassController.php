@@ -14,17 +14,16 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = Class_Room::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -38,8 +37,15 @@ class ClassController extends Controller
         $class = new Class_Room;
         $class->id_level=$request->id_level;
         $class->name=$request->name;
-        $class->status=$request->status;
-        $class->save();
+        $class->status=1;
+        if($class->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -50,18 +56,16 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        return Class_Room::where('id_class', $id)->get();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $class = Class_Room::where('id_class', $id)->get();
+        if($class->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$class
+        ]);
     }
 
     /**

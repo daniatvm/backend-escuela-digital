@@ -46,7 +46,16 @@ class SchoolController extends Controller
      */
     public function show($id)
     {
-        return School::where('id_school', $id)->get();
+        $school = School::where('id_school', $id)->get();
+        if($school->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$school
+        ]);
     }
 
     /**

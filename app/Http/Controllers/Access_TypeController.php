@@ -14,17 +14,16 @@ class Access_TypeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = Access_Type::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -37,7 +36,14 @@ class Access_TypeController extends Controller
     {
         $access_type = new Access_Type;
         $access_type->name=$request->name;
-        $access_type->save();
+        if($access_type->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -46,25 +52,19 @@ class Access_TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function bar(){
-        return response()->json([
-            'message'=>'ME LE CAGO A JAIR'
-        ]);
-    }
+
     public function show($id)
     {
-        return Access_Type::where('id_access_type', $id)->get();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $access_type = Access_Type::where('id_access_type', $id)->get();
+        if($access_type->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$access_type
+        ]);
     }
 
     /**

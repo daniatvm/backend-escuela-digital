@@ -19,8 +19,8 @@ class CreateUserTable extends Migration
             $table->foreign('id_employee')->references('id_employee')->on('employee');
             $table->unsignedBigInteger('id_access_type');
             $table->foreign('id_access_type')->references('id_access_type')->on('access_type');
-            $table->string('username',50);
-            $table->string('password',50);
+            $table->string('username',50)->unique();
+            $table->string('password',200);
             $table->boolean('status');
             $table->timestamps();
         });

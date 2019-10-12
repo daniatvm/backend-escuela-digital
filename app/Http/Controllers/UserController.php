@@ -14,17 +14,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = User::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -39,9 +38,17 @@ class UserController extends Controller
         $user->id_employee=$request->id_employee;
         $user->id_access_type=$request->id_access_type;
         $user->username=$request->username;
-        $user->password=$request->password;
-        $user->status=$request->status;
-        $user->save();
+        $user->password=password_hash($request->password,PASSWORD_DEFAULT);
+        $user->status=1;
+        if($user->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
+        //return encrypt($request->password);
     }
 
     /**
@@ -52,18 +59,29 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::where('id_user', $id)->get();
+        $user = User::where('id_user', $id)->get();
+        if($user->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$user
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function authenticate(Request $request){
+        $user = User::where('username',$request->username)->first();
+        if((!$user == null) && (password_verify($request->password, $user->password)) && ($user->status==1)) {
+            return response()->json([
+                'success'=>true,
+                'data'=>["id_access_type"=>$user->id_access_type, "id_employee"=>$user->id_employee, "id_user"=>$user->id_user, "username"=>$user->username]
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**

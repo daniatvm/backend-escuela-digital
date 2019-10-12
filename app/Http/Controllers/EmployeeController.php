@@ -14,17 +14,16 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = Employee::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -45,8 +44,15 @@ class EmployeeController extends Controller
         $employee->cellphone=$request->cellphone;
         $employee->image=$request->image;
         $employee->id_card=$request->id_card;
-        $employee->status=$request->status;
-        $employee->save();
+        $employee->status=1;
+        if($employee->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -57,20 +63,18 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        return Employee::where('id_employee', $id)->get();
+        $employee = Employee::where('id_employee', $id)->get();
+        if($employee->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$employee
+        ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *

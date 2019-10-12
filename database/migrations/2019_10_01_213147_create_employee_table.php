@@ -22,10 +22,10 @@ class CreateEmployeeTable extends Migration
             $table->string('name',10);
             $table->string('last_name',10);
             $table->string('second_last_name',10);
-            $table->string('email',50);
+            $table->string('email',50)->unique();
             $table->string('cellphone',10);
             $table->string('image',150);
-            $table->string('id_card',10);
+            $table->string('id_card',10)->unique();
             $table->boolean('status');
             $table->timestamps();
         });

@@ -14,17 +14,16 @@ class Class_x_EmployeeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = Class_x_Employee::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -39,7 +38,14 @@ class Class_x_EmployeeController extends Controller
         $class_x_employee->id_class=$request->id_class;
         $class_x_employee->id_employee=$request->id_employee;
         $class_x_employee->type=$request->type;
-        $class_x_employee->save();
+        if($class_x_employee->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -50,18 +56,16 @@ class Class_x_EmployeeController extends Controller
      */
     public function show($id)
     {
-        return Class_x_Employee::where('id_class_x_employee', $id)->get();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $class_x_employee = Class_x_Employee::where('id_class_x_employee', $id)->get();
+        if($class_x_employee->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$class_x_employee
+        ]);
     }
 
     /**

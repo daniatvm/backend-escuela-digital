@@ -14,17 +14,16 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = Gallery::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -38,7 +37,14 @@ class GalleryController extends Controller
         $gallery = new Gallery;
         $gallery->id_school=$request->id_school;
         $gallery->image=$request->image;
-        $gallery->save();
+        if($gallery->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -49,18 +55,16 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        return Gallery::where('id_gallery', $id)->get();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $gallery = Gallery::where('id_gallery', $id)->get();
+        if($gallery->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$gallery
+        ]);
     }
 
     /**

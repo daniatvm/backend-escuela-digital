@@ -14,17 +14,16 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = Feedback::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -42,8 +41,15 @@ class FeedbackController extends Controller
         $feedback->cellphone=$request->cellphone;
         $feedback->email=$request->email;
         $feedback->feedback_text=$request->feedback_text;
-        $feedback->status=$request->status;
-        $feedback->save();
+        $feedback->status=1;
+        if($feedback->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -54,18 +60,16 @@ class FeedbackController extends Controller
      */
     public function show($id)
     {
-        return Feedback::where('id_feedback', $id)->get();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $feedback = Feedback::where('id_feedback', $id)->get();
+        if($feedback->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$feedback
+        ]);
     }
 
     /**

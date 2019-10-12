@@ -14,17 +14,16 @@ class Board_of_EducationController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = Board_of_Education::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -40,7 +39,14 @@ class Board_of_EducationController extends Controller
         $board_of_education->description=$request->description;
         $board_of_education->email=$request->email;
         $board_of_education->telephone=$request->telephone;
-        $board_of_education->save();
+        if($board_of_education->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -51,18 +57,16 @@ class Board_of_EducationController extends Controller
      */
     public function show($id)
     {
-        return Board_of_Education::where('id_board_of_education', $id)->get();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $board_of_education = Board_of_Education::where('id_board_of_education', $id)->get();
+        if($board_of_education->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$board_of_education
+        ]);
     }
 
     /**

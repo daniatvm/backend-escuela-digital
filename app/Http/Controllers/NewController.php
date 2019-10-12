@@ -14,17 +14,16 @@ class NewController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all = News::all();
+        if($all->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$all
+        ]);
     }
 
     /**
@@ -43,8 +42,15 @@ class NewController extends Controller
         $new->description=$request->description;
         $new->date=$request->date;
         $new->image=$request->image;
-        $new->status=$request->status;
-        $new->save();
+        $new->status=1;
+        if($new->save()){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -55,18 +61,16 @@ class NewController extends Controller
      */
     public function show($id)
     {
-        return News::where('id_new', $id)->get();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $new = News::where('id_new', $id)->get();
+        if($new->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$new
+        ]);
     }
 
     /**
