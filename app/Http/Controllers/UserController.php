@@ -93,7 +93,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = User::where('id_user',$id)->update($request->all());
+        if($update==1){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -104,6 +112,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $update = User::where('id_user',$id)->update(['status'=>0]);
+        if($update==1){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 }

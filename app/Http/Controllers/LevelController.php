@@ -75,7 +75,15 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = Level::where('id_level',$id)->update($request->all());
+        if($update==1){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -86,6 +94,14 @@ class LevelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Level::where('id_level',$id)->delete();
+        if($delete==1){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 }

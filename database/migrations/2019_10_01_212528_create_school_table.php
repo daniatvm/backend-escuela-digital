@@ -20,7 +20,6 @@ class CreateSchoolTable extends Migration
             $table->string("address",100);
             $table->string("image",150);
             $table->string("email",50);
-            $table->string("cellphone",10);
             $table->string("telephone",10);
             $table->float("lat",10,6);
             $table->float("lng",10,6);

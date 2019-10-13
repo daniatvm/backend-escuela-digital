@@ -77,7 +77,15 @@ class ClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = Class_Room::where('id_class',$id)->update($request->all());
+        if($update==1){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 
     /**
@@ -88,6 +96,14 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $update = Class_Room::where('id_class',$id)->update(['status'=>0]);
+        if($update==1){
+            return response()->json([
+                'success'=>true
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
     }
 }
