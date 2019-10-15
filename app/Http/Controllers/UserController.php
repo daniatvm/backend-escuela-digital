@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $all = User::all();
+        $all = User::where('status',1)->get();
         if($all->isEmpty()){
             return response()->json([
                 'success'=>false
@@ -48,7 +48,6 @@ class UserController extends Controller
         return response()->json([
             'success'=>false
         ]);
-        //return encrypt($request->password);
     }
 
     /**
@@ -71,12 +70,42 @@ class UserController extends Controller
         ]);
     }
 
-    public function authenticate(Request $request){
+    public function authenticate(Request $request)
+    {
         $user = User::where('username',$request->username)->first();
-        if((!$user == null) && (password_verify($request->password, $user->password)) && ($user->status==1)) {
+        if(($user != null) && (password_verify($request->password, $user->password)) && ($user->status==1)) {
             return response()->json([
                 'success'=>true,
                 'data'=>["id_access_type"=>$user->id_access_type, "id_employee"=>$user->id_employee, "id_user"=>$user->id_user, "username"=>$user->username]
+            ]);
+        }
+        return response()->json([
+            'success'=>false
+        ]);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = User::where('username',$request->username)->first();
+        if(($user != null) && (password_verify($request->password, $user->password)) && ($user->status==1)) {
+            $update = User::where('id_user',$user->id_user)->update(['password'=>password_hash($user->password,PASSWORD_DEFAULT)]);
+            if($update){
+                return response()->json([
+                    'success'=>true
+                ]);
+            }
+        }
+        return response()->json([
+            'success'=>false
+        ]);
+    }
+
+    public function uniqueUsername(Request $request)
+    {
+        $user = User::where('username',$request->username)->get();
+        if($user->isEmpty()){
+            return response()->json([
+                'success'=>true
             ]);
         }
         return response()->json([
@@ -94,7 +123,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $update = User::where('id_user',$id)->update($request->all());
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);
@@ -113,7 +142,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $update = User::where('id_user',$id)->update(['status'=>0]);
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);

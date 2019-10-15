@@ -14,7 +14,7 @@ class Class_x_EmployeeController extends Controller
      */
     public function index()
     {
-        $all = Class_x_Employee::all();
+        $all = Class_x_Employee::where('status',1)->get();
         if($all->isEmpty()){
             return response()->json([
                 'success'=>false
@@ -45,6 +45,20 @@ class Class_x_EmployeeController extends Controller
         }
         return response()->json([
             'success'=>false
+        ]);
+    }
+
+    public function showClasses($id1,$id2)
+    {
+        $classes = Class_x_Employee::where('id_class',$id1)->where('id_employee',$id2)->get();
+        if($classes->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$classes
         ]);
     }
 

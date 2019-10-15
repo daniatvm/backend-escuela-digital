@@ -41,7 +41,6 @@ class FeedbackController extends Controller
         $feedback->cellphone=$request->cellphone;
         $feedback->email=$request->email;
         $feedback->feedback_text=$request->feedback_text;
-        $feedback->status=1;
         if($feedback->save()){
             return response()->json([
                 'success'=>true

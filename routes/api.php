@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('access_type', 'Access_TypeController')->except('create','edit','destroy','update');
 Route::resource('board_of_education', 'Board_of_EducationController')->except('create','edit','destroy');
 Route::resource('class', 'ClassController')->except('create','edit');
+Route::get('class_x_employee/{class}/{employee}','Class_x_EmployeeController@showClasses')->name('class_x_employee.showClasses');
 Route::resource('class_x_employee', 'Class_x_EmployeeController')->except('create','edit');
 Route::resource('employee', 'EmployeeController')->except('create','edit');
 Route::resource('feedback', 'FeedbackController')->except('create','edit','update');
@@ -30,4 +31,6 @@ Route::resource('new_type', 'New_TypeController')->except('create','edit','destr
 Route::resource('new', 'NewController')->except('create','edit','update');
 Route::resource('school', 'SchoolController')->except('index','create','edit','destroy');
 Route::post('user/authenticate', 'UserController@authenticate')->name('user.authenticate');
+Route::post('user/change_password','UserController@changePassword')->name('user.changePassword');
+Route::post('user/unique_username','UserController@uniqueUsername')->name('user.uniqueUsername');
 Route::resource('user', 'UserController')->except('create','edit');

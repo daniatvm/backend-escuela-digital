@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $all = Employee::all();
+        $all = Employee::where('status',1)->get();
         if($all->isEmpty()){
             return response()->json([
                 'success'=>false
@@ -40,14 +40,13 @@ class EmployeeController extends Controller
         $employee->name=$request->name;
         $employee->last_name=$request->last_name;
         $employee->second_last_name=$request->second_last_name;
-        $employee->email=$request->email;
-        $employee->cellphone=$request->cellphone;
         $employee->image=$request->image;
         $employee->id_card=$request->id_card;
         $employee->status=1;
         if($employee->save()){
             return response()->json([
-                'success'=>true
+                'success'=>true,
+                'data'=>$employee->id
             ]);
         }
         return response()->json([

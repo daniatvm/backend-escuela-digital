@@ -14,7 +14,7 @@ class NewController extends Controller
      */
     public function index()
     {
-        $all = News::all();
+        $all = News::where('status',1)->get();
         if($all->isEmpty()){
             return response()->json([
                 'success'=>false

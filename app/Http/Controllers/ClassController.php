@@ -14,7 +14,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $all = Class_Room::all();
+        $all = Class_Room::where('status',1)->get();
         if($all->isEmpty()){
             return response()->json([
                 'success'=>false

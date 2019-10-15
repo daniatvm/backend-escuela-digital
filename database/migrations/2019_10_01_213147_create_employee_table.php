@@ -19,12 +19,10 @@ class CreateEmployeeTable extends Migration
             $table->foreign('id_job')->references('id_job')->on('job');
             $table->unsignedBigInteger('id_school');
             $table->foreign('id_school')->references('id_school')->on('school');
-            $table->string('name',10);
-            $table->string('last_name',10);
-            $table->string('second_last_name',10);
-            $table->string('email',50)->unique();
-            $table->string('cellphone',10);
-            $table->string('image',150);
+            $table->string('name',20);
+            $table->string('last_name',20);
+            $table->string('second_last_name',20);
+            $table->string('image',150)->nullable();
             $table->string('id_card',10)->unique();
             $table->boolean('status');
             $table->timestamps();

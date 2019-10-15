@@ -22,7 +22,6 @@ class CreateFeedbackTable extends Migration
             $table->string('cellphone',10);
             $table->string('email',50);
             $table->string('feedback_text',300);
-            $table->boolean('status');
             $table->timestamps();
         });
     }
