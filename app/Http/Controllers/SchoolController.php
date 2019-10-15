@@ -37,7 +37,7 @@ class SchoolController extends Controller
     public function update(Request $request, $id)
     {
         $update = School::where('id_school',$id)->update($request->all());
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);

@@ -80,7 +80,7 @@ class FeedbackController extends Controller
     public function destroy($id)
     {
         $delete = Feedback::where('id_feedback',$id)->delete();
-        if($delete==1){
+        if($delete){
             return response()->json([
                 'success'=>true
             ]);

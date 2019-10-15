@@ -84,7 +84,7 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $update = Employee::where('id_employee',$id)->update($request->all());
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);
@@ -103,7 +103,7 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         $update = Employee::where('id_employee',$id)->update(['status'=>0]);
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);

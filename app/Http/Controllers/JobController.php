@@ -76,7 +76,7 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         $update = Job::where('id_job',$id)->update($request->all());
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);
@@ -95,7 +95,7 @@ class JobController extends Controller
     public function destroy($id)
     {
         $delete = Job::where('id_job',$id)->delete();
-        if($delete==1){
+        if($delete){
             return response()->json([
                 'success'=>true
             ]);

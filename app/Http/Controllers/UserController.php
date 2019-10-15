@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Employee;
 
 class UserController extends Controller
 {
@@ -90,6 +91,24 @@ class UserController extends Controller
         if(($user != null) && (password_verify($request->password, $user->password)) && ($user->status==1)) {
             $update = User::where('id_user',$user->id_user)->update(['password'=>password_hash($user->password,PASSWORD_DEFAULT)]);
             if($update){
+                return response()->json([
+                    'success'=>true
+                ]);
+            }
+        }
+        return response()->json([
+            'success'=>false
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    //puede hacerse x username o mejorarse el pichazo de consultas
+    {
+        $user = User::where('id_user',$request->id_user)->value('id_employee');
+        if($user!=null){
+            $employee = Employee::where('id_employee', $user)->value('id_card');
+            if($employee!=null){
+                $update = User::where('id_user',$request->id_user)->update(['password'=>password_hash($employee,PASSWORD_DEFAULT)]);
                 return response()->json([
                     'success'=>true
                 ]);

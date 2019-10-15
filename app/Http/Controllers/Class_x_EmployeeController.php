@@ -92,7 +92,7 @@ class Class_x_EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $update = Class_x_Employee::where('id_class_x_employee',$id)->update($request->all());
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);
@@ -111,7 +111,7 @@ class Class_x_EmployeeController extends Controller
     public function destroy($id)
     {
         $delete = Class_x_Employee::where('id_class_x_employee',$id)->delete();
-        if($delete==1){
+        if($delete){
             return response()->json([
                 'success'=>true
             ]);

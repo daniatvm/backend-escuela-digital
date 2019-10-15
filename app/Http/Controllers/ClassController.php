@@ -78,7 +78,7 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         $update = Class_Room::where('id_class',$id)->update($request->all());
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);
@@ -97,7 +97,7 @@ class ClassController extends Controller
     public function destroy($id)
     {
         $update = Class_Room::where('id_class',$id)->update(['status'=>0]);
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);

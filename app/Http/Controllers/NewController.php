@@ -82,7 +82,7 @@ class NewController extends Controller
     public function destroy($id)
     {
         $update = News::where('id_new',$id)->update(['status'=>0]);
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);

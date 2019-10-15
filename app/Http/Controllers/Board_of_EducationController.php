@@ -79,7 +79,7 @@ class Board_of_EducationController extends Controller
     public function update(Request $request, $id)
     {
         $update = Board_of_Education::where('id_board_of_education',$id)->update($request->all());
-        if($update==1){
+        if($update){
             return response()->json([
                 'success'=>true
             ]);

@@ -32,5 +32,6 @@ Route::resource('new', 'NewController')->except('create','edit','update');
 Route::resource('school', 'SchoolController')->except('index','create','edit','destroy');
 Route::post('user/authenticate', 'UserController@authenticate')->name('user.authenticate');
 Route::post('user/change_password','UserController@changePassword')->name('user.changePassword');
+Route::post('user/reset_password', 'UserController@resetPassword')->name('user.resetPassword');
 Route::post('user/unique_username','UserController@uniqueUsername')->name('user.uniqueUsername');
 Route::resource('user', 'UserController')->except('create','edit');

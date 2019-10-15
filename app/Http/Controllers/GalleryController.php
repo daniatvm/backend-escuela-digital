@@ -76,7 +76,7 @@ class GalleryController extends Controller
     public function destroy($id)
     {
         $delete = Gallery::where('id_gallery',$id)->delete();
-        if($delete==1){
+        if($delete){
             return response()->json([
                 'success'=>true
             ]);
