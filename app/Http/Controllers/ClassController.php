@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Class_Room;
+use App\Class_x_Employee;
 
 class ClassController extends Controller
 {
@@ -39,9 +40,15 @@ class ClassController extends Controller
         $class->name=$request->name;
         $class->status=1;
         if($class->save()){
-            return response()->json([
-                'success'=>true
-            ]);
+            $class_x_employee = new Class_x_Employee;
+            $class_x_employee->id_class=$class->id;
+            $class_x_employee->id_employee=$request->id_employee;
+            $class_x_employee->type=$request->type;
+            if($class_x_employee->save()){
+                return response()->json([
+                    'success'=>true
+                ]);
+            }
         }
         return response()->json([
             'success'=>false
