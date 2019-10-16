@@ -22,6 +22,7 @@ Route::resource('board_of_education', 'Board_of_EducationController')->except('c
 Route::resource('class', 'ClassController')->except('create','edit');
 Route::get('class_x_employee/{class}/{employee}','Class_x_EmployeeController@showClasses')->name('class_x_employee.showClasses');
 Route::resource('class_x_employee', 'Class_x_EmployeeController')->except('create','edit');
+Route::get('employee/by_job/{job}','EmployeeController@byJob')->name('employee.byJob');
 Route::resource('employee', 'EmployeeController')->except('create','edit');
 Route::resource('feedback', 'FeedbackController')->except('create','edit','update');
 Route::resource('gallery', 'GalleryController')->except('create','edit','update');

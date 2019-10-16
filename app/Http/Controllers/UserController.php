@@ -102,13 +102,12 @@ class UserController extends Controller
     }
 
     public function resetPassword(Request $request)
-    //puede hacerse x username o mejorarse el pichazo de consultas
     {
-        $user = User::where('id_user',$request->id_user)->value('id_employee');
-        if($user!=null){
-            $employee = Employee::where('id_employee', $user)->value('id_card');
-            if($employee!=null){
-                $update = User::where('id_user',$request->id_user)->update(['password'=>password_hash($employee,PASSWORD_DEFAULT)]);
+        $employee = Employee::where('id_employee',$request->id_employee)->value('id_card');
+        $user = User::where('id_employee',$request->id_employee)->first();
+        if(($employee!=null) && ($user!=null)){
+            $update = User::where('id_user',$user->id_user)->update(['password'=>password_hash($employee,PASSWORD_DEFAULT)]);
+            if($update){
                 return response()->json([
                     'success'=>true
                 ]);

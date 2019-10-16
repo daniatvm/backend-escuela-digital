@@ -73,6 +73,20 @@ class EmployeeController extends Controller
             'data'=>$employee
         ]);
     }
+
+    public function byJob($id)
+    {
+        $employees = Employee::where('id_job',$id)->get();
+        if($employees->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$employees
+        ]);
+    }
     
     /**
      * Update the specified resource in storage.
