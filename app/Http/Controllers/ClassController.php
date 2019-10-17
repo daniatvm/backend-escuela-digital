@@ -75,6 +75,34 @@ class ClassController extends Controller
         ]);
     }
 
+    public function byEmployee($id)
+    {
+        $classes = Class_x_Employee::join('class','class_x_employee.id_class','=','class.id_class')->select('class.id_level','class.id_class','class.name')->where('class_x_employee.id_employee',$id)->get();
+        if($classes->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$classes
+        ]);
+    }
+
+    public function byNotEmployee($id)
+    {
+        $classes = Class_x_Employee::join('class','class_x_employee.id_class','=','class.id_class')->select('class.id_level','class.id_class','class.name')->where('class_x_employee.id_employee','<>',$id)->get();
+        if($classes->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$classes
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

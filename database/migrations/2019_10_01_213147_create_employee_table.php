@@ -23,7 +23,7 @@ class CreateEmployeeTable extends Migration
             $table->string('last_name',20);
             $table->string('second_last_name',20);
             $table->string('image',150)->nullable();
-            $table->string('id_card',10)->unique();
+            $table->string('id_card',15)->unique();
             $table->boolean('status');
             $table->timestamps();
         });
