@@ -34,7 +34,7 @@ Route::resource('new_type', 'New_TypeController')->except('create','edit','destr
 Route::get('new/by_new_type/{new_type}','NewController@byNewType')->name('new.byNewType');
 Route::get('new/by_user/{user}','NewController@byUser')->name('new.byUser');
 Route::get('new/by_class/{class}','NewController@byClass')->name('new.byClass');
-Route::get('new/by_foreign','NewController@byForeign')->name('new.byForeign');
+Route::get('new/by_specific/{user}/{new_type}/{class}','NewController@bySpecific')->name('new.bySpecific');
 Route::resource('new', 'NewController')->except('create','edit','update');
 Route::resource('school', 'SchoolController')->except('index','create','edit','destroy');
 Route::post('user/authenticate', 'UserController@authenticate')->name('user.authenticate');

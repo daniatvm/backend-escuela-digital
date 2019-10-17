@@ -112,9 +112,9 @@ class NewController extends Controller
         ]);
     }
 
-    public function byForeign(Request $request)
+    public function bySpecific($id1,$id2,$id3)
     {
-        $new = News::where('id_user',$request->id_user)->where('id_new_type',$request->id_new_type)->where('id_class',$request->id_class)->get();
+        $new = News::join('user','new.id_user','=','user.id_user')->join('employee','employee.id_employee','=','user.id_employee')->join('class','class.id_class','=','new.id_class')->select('employee.name','employee.last_name','employee.second_last_name','class.name as class_name','new.*')->get();
         if($new->isEmpty()){
             return response()->json([
                 'success'=>false
