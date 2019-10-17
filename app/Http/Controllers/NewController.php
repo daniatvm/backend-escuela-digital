@@ -61,7 +61,60 @@ class NewController extends Controller
      */
     public function show($id)
     {
-        $new = News::where('id_new', $id)->get();
+        $new = News::where('id_new', $id)->where('status',1)->get();
+        if($new->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$new
+        ]);
+    }
+
+    public function byNewType($id){
+        $news = News::where('id_new_type',$id)->where('status',1)->get();
+        if($news->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$news
+        ]);
+    }
+
+    public function byUser($id){
+        $news = News::where('id_user',$id)->where('status',1)->get();
+        if($news->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$news
+        ]);
+    }
+
+    public function byClass($id){
+        $news = News::where('id_class',$id)->where('status',1)->get();
+        if($news->isEmpty()){
+            return response()->json([
+                'success'=>false
+            ]);
+        }
+        return response()->json([
+            'success'=>true,
+            'data'=>$news
+        ]);
+    }
+
+    public function byForeign(Request $request)
+    {
+        $new = News::where('id_user',$request->id_user)->where('id_new_type',$request->id_new_type)->where('id_class',$request->id_class)->get();
         if($new->isEmpty()){
             return response()->json([
                 'success'=>false
