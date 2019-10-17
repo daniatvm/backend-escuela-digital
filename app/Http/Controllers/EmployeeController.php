@@ -76,7 +76,7 @@ class EmployeeController extends Controller
 
     public function byJob($id)
     {
-        $employees = Employee::where('id_job',$id)->get();
+        $employees = Employee::where('id_job',$id)->where('status',1)->get();
         if($employees->isEmpty()){
             return response()->json([
                 'success'=>false

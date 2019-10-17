@@ -59,7 +59,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id_user', $id)->get();
+        $user = User::where('id_user', $id)->where('status',1)->get();
         if($user->isEmpty()){
             return response()->json([
                 'success'=>false

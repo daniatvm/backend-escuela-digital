@@ -77,7 +77,7 @@ class ClassController extends Controller
 
     public function byEmployee($id)
     {
-        $classes = Class_x_Employee::join('class','class_x_employee.id_class','=','class.id_class')->select('class.id_level','class.id_class','class.name','class_x_employee.id_class_x_employee')->where('class_x_employee.id_employee',$id)->get();
+        $classes = Class_x_Employee::join('class','class_x_employee.id_class','=','class.id_class')->select('class.id_level','class.id_class','class.name','class_x_employee.id_class_x_employee')->where('class_x_employee.id_employee',$id)->where('status',1)->get();
         if($classes->isEmpty()){
             return response()->json([
                 'success'=>false
@@ -93,7 +93,7 @@ class ClassController extends Controller
     {
         $notClasses = Class_x_Employee::join('class','class_x_employee.id_class','=','class.id_class')->select('class.id_class')->where('class_x_employee.id_employee',$id)->get();
         if($notClasses->isEmpty()){
-            $classes = Class_Room::select('id_level','id_class','name')->get();
+            $classes = Class_Room::select('id_level','id_class','name')->where('status',1)->get();
             if(!$classes->isEmpty()){
                 return response()->json([
                     'success'=>true,
@@ -102,7 +102,7 @@ class ClassController extends Controller
             }
         }else{
             
-            $classes = Class_Room::select('id_level','id_class','name')->whereNotIn('id_class',$notClasses->pluck('id_class'))->get();
+            $classes = Class_Room::select('id_level','id_class','name')->whereNotIn('id_class',$notClasses->pluck('id_class'))->where('status',1)->get();
             if(!$classes->isEmpty()){
                 return response()->json([
                     'success'=>true,
