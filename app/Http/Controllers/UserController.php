@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         $user = User::where('username',$request->username)->first();
         if(($user != null) && (password_verify($request->password, $user->password)) && ($user->status==1)) {
-            $update = User::where('id_user',$user->id_user)->update(['password'=>password_hash($user->password,PASSWORD_DEFAULT)]);
+            $update = User::where('id_user',$user->id_user)->update(['password'=>password_hash($request->new_password,PASSWORD_DEFAULT)]);
             if($update){
                 return response()->json([
                     'success'=>true

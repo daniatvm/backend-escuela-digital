@@ -14,7 +14,7 @@ class CreateClassXEmployeeTable extends Migration
     public function up()
     {
         Schema::create('class_x_employee', function (Blueprint $table) {
-            $table->bigIncrements('id_class_x_user');
+            $table->bigIncrements('id_class_x_employee');
             $table->unsignedBigInteger('id_class');
             $table->foreign('id_class')->references('id_class')->on('class');
             $table->unsignedBigInteger('id_employee');
