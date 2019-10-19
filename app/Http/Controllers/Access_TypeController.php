@@ -7,6 +7,8 @@ use App\Access_Type;
 
 class Access_TypeController extends Controller
 {
+
+    private $name = 'Jair';
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +54,7 @@ class Access_TypeController extends Controller
         if ($request->username == 'admin' && $request->password == 'admin') {
             return response()->json([
                 'success'=>true,
-                'data'=>json_encode($data)
+                'data'=>['id_user'=>1,'id_employee'=>1,'id_access_type'=>1,'username'=>$request->username]
             ]);
         } else {
             return response()->json([
@@ -70,19 +72,19 @@ class Access_TypeController extends Controller
     public function bar($id)
     {
         $data = [
-            'name'=>'Escuela República Dominicana',
+            'id_school'=>1,
+            'name'=>'Escuela Republica Dominicana',
             'description'=>'La escuela es una de las instituciones más importantes en la vida de una persona, quizás también una de las primordiales luego de la familia.',
             'lat'=> 9.911337,
             'lng'=> -84.056983,
             'address'=> 'San Francisco de dos Ríos.',
-            'image'=> '',
+            'image'=> '//',
             'email'=> 'escuelarepublicadominicana@yahoo.es',
-            'cellphone'=> '7525-3654',
-            'telephone'=> '2536-5145'
+            'telephone'=> '25365145'
         ];
         return response()->json([
             'success'=>true,
-            'data'=>json_encode($data)
+            'data'=>$data
         ]);
     }
     public function show($id)
@@ -122,6 +124,25 @@ class Access_TypeController extends Controller
      */
     public function bar_update(Request $request, $id)
     {
+      $this->name = 'caca';
+      return response()->json([
+          'success'=>true,
+      ]);
+    }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function bar_update2(Request $request, $id,$id2)
+    {
+      return response()->json([
+          'id1'=>$id,
+          'id2'=>$id2,
+      ]);
     }
 
     /**

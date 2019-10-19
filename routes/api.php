@@ -20,6 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('access_type/bar/{id_school}',  'Access_TypeController@bar');//este es para obtener escuela
 Route::post('access_type/bar',  'Access_TypeController@bar_post');//este es para validar login
 Route::put('access_type/bar/{id_school}',  'Access_TypeController@bar_update');
+
+
+Route::get('access_type/bar/{id_school}/{id_school2}',  'Access_TypeController@bar_update2');
+
+
+
 Route::resource('access_type', 'Access_TypeController');
 Route::resource('board_of_education', 'Board_of_EducationController');
 Route::resource('class_x_employee', 'Class_x_EmployeeController');
