@@ -100,7 +100,15 @@ class NewController extends Controller
     }
 
     public function byClass($id){
-        $news = News::where('id_class',$id)->where('status',1)->get();
+        $id2 = 2;
+        
+        $news = News::join('user','new.id_user','=','user.id_user')
+        ->join('employee','employee.id_employee','=','user.id_employee')
+        ->join('class','class.id_class','=','new.id_class')
+        ->select('employee.name','employee.last_name','employee.second_last_name','class.name as class_name','new.*')
+        ->where('new.id_new_type',$id2)
+        ->where('new.id_class',$id)
+        ->get();
         if($news->isEmpty()){
             return response()->json([
                 'success'=>false
