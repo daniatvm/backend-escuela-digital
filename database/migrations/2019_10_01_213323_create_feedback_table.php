@@ -15,7 +15,7 @@ class CreateFeedbackTable extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->bigIncrements('id_feedback');
-            $table->unsignedBigInteger('id_school');
+            $table->bigInteger('id_school');
             $table->foreign('id_school')->references('id_school')->on('school');
             $table->boolean('type');
             $table->string('name',50);

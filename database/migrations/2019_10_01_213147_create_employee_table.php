@@ -17,7 +17,7 @@ class CreateEmployeeTable extends Migration
             $table->bigIncrements('id_employee');
             $table->unsignedBigInteger('id_job');
             $table->foreign('id_job')->references('id_job')->on('job');
-            $table->unsignedBigInteger('id_school');
+            $table->bigInteger('id_school');
             $table->foreign('id_school')->references('id_school')->on('school');
             $table->string('name',20);
             $table->string('last_name',20);

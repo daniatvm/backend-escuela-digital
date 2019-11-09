@@ -15,7 +15,7 @@ class CreateBoardOfEducationTable extends Migration
     {
         Schema::create('board_of_education', function (Blueprint $table) {
             $table->bigIncrements('id_board_education');
-            $table->unsignedBigInteger("id_school");
+            $table->bigInteger("id_school");
             $table->foreign("id_school")->references("id_school")->on("school");
             $table->string("description",200);
             $table->string("email",50);

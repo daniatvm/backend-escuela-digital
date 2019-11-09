@@ -15,9 +15,9 @@ class CreateUserTable extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->bigIncrements('id_user');
-            $table->unsignedBigInteger('id_employee');
+            $table->unsignedBigInteger('id_employee')->nullable();
             $table->foreign('id_employee')->references('id_employee')->on('employee');
-            $table->unsignedBigInteger('id_access_type');
+            $table->bigInteger('id_access_type');
             $table->foreign('id_access_type')->references('id_access_type')->on('access_type');
             $table->string('username',50)->unique();
             $table->string('password',200);
