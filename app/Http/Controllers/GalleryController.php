@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gallery;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -35,11 +36,30 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $gallery = new Gallery;
+        
+
         $gallery->id_school=$request->id_school;
+
+        //
+
+        
+
         $gallery->image=$request->image;
+
         if($gallery->save()){
+            
+            $path = Storage::disk('public')->put('images/school_gallery/'.$gallery->id.".".$request->type,base64_decode($request->content));
+
+            //$gallery->image = public_path().'/images/school_gallery/'.$gallery->id.".".$request->type;
+            
+            $update = Gallery::where('id_gallery',$gallery->id)
+                        ->update([
+                            'image'=>'http://localhost/~mugi-ya/respaldo-laravel/public/images/school_gallery/'.$gallery->id.".".$request->type
+                        ]);
+
             return response()->json([
-                'success'=>true
+                'success'=>true,
+                'data' => 'http://localhost/~mugi-ya/respaldo-laravel/public/images/school_gallery/'.$gallery->id.".".$request->type
             ]);
         }
         return response()->json([

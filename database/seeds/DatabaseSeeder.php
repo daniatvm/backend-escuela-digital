@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             "name" => "Repuplica Dominicana",
             "description" => ".",
             "address" => ".",
-            "image" => ".",
+            "image" => "https://www.bellinghames.org/ourpages/auto/2018/9/6/63182583/school.jpg",
             "email" => "escuela@escuela.com",
             "telephone" => "88884444",
             "lat" => 9.9112463,
