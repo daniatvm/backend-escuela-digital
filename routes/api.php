@@ -21,6 +21,9 @@ Route::resource('access_type', 'Access_TypeController')->except('create','edit',
 Route::resource('board_of_education', 'Board_of_EducationController')->except('create','edit','destroy');
 Route::get('class/by_employee/{employee}', 'ClassController@byEmployee')->name('class.byEmployee');
 Route::get('class/by_not_employee/{employee}', 'ClassController@byNotEmployee')->name('class.byNotEmployee');
+
+Route::get('class/by_level/{level}', 'ClassController@byLevel')->name('class.byLevel');
+
 Route::resource('class', 'ClassController')->except('create','edit');
 Route::get('class_x_employee/{class}/{employee}','Class_x_EmployeeController@showClasses')->name('class_x_employee.showClasses');
 Route::resource('class_x_employee', 'Class_x_EmployeeController')->except('create','edit');

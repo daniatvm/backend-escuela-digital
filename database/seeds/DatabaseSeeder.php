@@ -9,8 +9,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function access()
-    {
+    public function access(){
         DB::table('access_type')->insert([
             'id_access_type'=> 1,
             'name' => "Administrador"
@@ -33,8 +32,8 @@ class DatabaseSeeder extends Seeder
         ]);    
     }
     
-    public function adminDefault()
-    {
+   
+    public function user_default(){
         DB::table('user')->insert([
             'id_access_type'=> 1,
             'username' => "admin",
@@ -49,7 +48,7 @@ class DatabaseSeeder extends Seeder
             "name" => "Repuplica Dominicana",
             "description" => ".",
             "address" => ".",
-            "image" => ".",
+            "image" => "https://www.bellinghames.org/ourpages/auto/2018/9/6/63182583/school.jpg",
             "email" => "escuela@escuela.com",
             "telephone" => "88884444",
             "lat" => 9.9112463,
@@ -57,10 +56,55 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
+    public function level(){
+        DB::table('level')->insert([
+            'id_level' => 1,
+            'name' => "Kinder"
+        ]);
+        DB::table('level')->insert([
+            'id_level' => 2,
+            'name' => "Primero"
+        ]);
+        DB::table('level')->insert([
+            'id_level' => 3,
+            'name' => "Segundo"
+        ]);
+        DB::table('level')->insert([
+            'id_level' => 4,
+            'name' => "Tercero"
+        ]);
+        DB::table('level')->insert([
+            'id_level' => 5,
+            'name' => "Cuarto"
+        ]);
+        DB::table('level')->insert([
+            'id_level' => 6,
+            'name' => "Quinto"
+        ]);
+        DB::table('level')->insert([
+            'id_level' => 7,
+            'name' => "Sexto"
+        ]);
+    }
+
+    public function job(){
+        DB::table('job')->insert([
+            'name' => "Director"
+        ]);
+        DB::table('job')->insert([
+            'name' => "Profesor"
+        ]);
+        DB::table('job')->insert([
+            'name' => "Asistente"
+        ]);
+    }
+
     public function run()
     {
         $this->access();
         $this->school();
-        $this->adminDefault();
+        $this->user_default();
+        $this->level();
+        $this->job();
     }
 }
